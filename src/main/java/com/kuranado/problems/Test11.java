@@ -25,6 +25,10 @@ public class Test11 {
     }
 
     public static void solveSudoku(char[][] board) {
+        fun(board, false);
+    }
+
+    static void fun(char[][] board, boolean solved) {
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 if (board[i][j] == '.') {
@@ -49,12 +53,31 @@ public class Test11 {
                             }
                         }
                     }
+                    boolean flag = false;
                     for (int m = 1; m < candidates.length; m++) {
-                        if (candidates[m] > 0) {
-                            board[i][j] = (char) (candidates[m] + 48);
+                        if (candidates[m] == 0) {
+                            candidates[m] = -1;
+                            flag = true;
+                            board[i][j] = (char) (m + 48);
+                            if (i == 8 && j == 8) {
+                                solved = true;
+                            }
                             solveSudoku(board);
                         }
+                        if (solved) {
+                            return;
+                        }
+                        if (candidates[m] == -1) {
+                            flag = false;
+                            board[i][j] = '.';
+                        }
                     }
+                    if (!flag) {
+                        return;
+                    }
+                }
+                if (i == 8 && j == 8) {
+                    return;
                 }
             }
         }
