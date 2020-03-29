@@ -11,8 +11,8 @@ public class Test14 {
 
     public static void main(String[] args) {
         // Test Sample 1 10
-        int[][] grid = new int[][]{
-            {2}};
+        //int[][] grid = new int[][]{
+        //    {2}};
         // Test Sample 2 34
         //int[][] grid = new int[][]{
         //    {1, 2},
@@ -38,31 +38,34 @@ public class Test14 {
         //int[][] grid = new int[][]{
         //    {1}};
         // Test Sample 8 6
-        //int[][] grid = new int[][]{
-        //    {0, 1, 0}};
+        int[][] grid = new int[][]{
+            {0, 1, 0}};
         System.out.println(surfaceArea(grid));
     }
 
     public static int surfaceArea(int[][] grid) {
-        int[][] tmp = new int[grid.length + 1][grid[0].length + 1];
-        for (int i = 0; i < grid.length; i++) {
-            tmp[i][grid.length] = 0;
-            tmp[grid.length][i] = 0;
-            for (int j = 0; j < grid[i].length; j++) {
-                tmp[i][j] = grid[i][j];
-            }
-        }
+       
         int sum = 0;
         for (int i = 0; i < grid.length; i++) {
             for (int j = 0; j < grid[i].length; j++) {
                 if (grid[i][j] > 0) {
-                    sum += 4 * tmp[i][j] + 2 - Math.min(tmp[i][j], tmp[i][j + 1]) - Math.min(tmp[i][j], tmp[i + 1][j]);
+                    sum += 4 * grid[i][j] + 2;
                 }
+                // 上边一列    
                 if (i > 0) {
-                    sum -= Math.min(tmp[i][j], tmp[i - 1][j]);
+                    sum -= Math.min(grid[i][j], grid[i - 1][j]);
                 }
+                // 下边一列
+                if (i < grid.length - 1) {
+                    sum -= Math.min(grid[i][j], grid[i + 1][j]);
+                }
+                // 左边一列
                 if (j > 0) {
-                    sum -= Math.min(tmp[i][j], tmp[i][j - 1]);
+                    sum -= Math.min(grid[i][j], grid[i][j - 1]);
+                }
+                // 右边一列
+                if (j < grid[i].length - 1) {
+                    sum -= Math.min(grid[i][j], grid[i][j + 1]);
                 }
             }
         }
