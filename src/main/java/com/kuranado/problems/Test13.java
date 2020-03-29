@@ -1,7 +1,7 @@
 package com.kuranado.problems;
 
 /**
- * 999. 车的可用捕获量
+ * 999. 车的可用捕获量/可以被一步捕获的棋子数
  *
  * @version 1.0.0
  * @author: Xinling Jing
